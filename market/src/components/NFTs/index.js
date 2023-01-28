@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
 import Web3 from "web3/dist/web3.min.js";
 import BigNumber from 'big-number'
-
+import './index.css'
 
 import {
   marketplaceAddress
@@ -13,7 +14,6 @@ import {
 import NFTMarketplace from '../../artifacts/contracts/Marketplace.sol/NFTMarketplace.json'
 import IERC20 from "../../artifacts/contracts/Marketplace.sol/IERC20.json"
 import { Link } from 'react-router-dom';
-
 export default function Display() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
@@ -108,26 +108,28 @@ export default function Display() {
         </div>
       </div>
 
-
+          
       {/* <div className="item-details-page"> */}
       <div className="flex justify-center">
-        <div className="px-4" style={{ maxWidth: '1600px' }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        <div className="px-4 cards">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-3">
             {
               nfts.map((nft, i) => (
                 <div key={i} className="border shadow rounded-xl overflow-hidden">
-                  <img style={{maxWidth:"350px", maxHeight:"180px"}} src={nft.image} />
+                  <img style={{width:"300px", height:"300px", alignItems:'center'}} src={nft.image} />
                   {/* <div className="rounded" style={{backgroundImage:`url("${nft.image}")`, height:'350px', backgroundPosition:'center', backgroundSize:'cover', backgroundRepeat:'no-repeat'}}></div> */}
                   {/* <div className="rounded" style={{backgroundImage:`url("${nft.image}")`, height:'500px', backgroundPosition:'center', backgroundSize:'cover', backgroundRepeat:'no-repeat'}}></div> */}
-                  <div className="p-4">
-                    <p style={{ height: '64px', color:'black'}} className="text-2xl font-semibold">{nft.name}</p>
-                    <div style={{ height: '70px', overflow: 'hidden' }}>
-                      <p className="text-gray-400">{nft.description}</p>
+                  <div className="p-4" style={{overflow:'hidden'}}>
+                    <p style={{ fontSize:"20px", color:'black'}} className="text-2xl font-bold">{nft.name}</p>
+                    <div  style={{overflow:'hidden'}}>
+                      <p className="text-gray-400" style={{lineHeight: '20px', fontSize:'12px'}}>{nft.description}</p>
                     </div>
                   </div>
+                  <div style={{}}>
                   <div className="p-4 bg-black">
                     <p className="text-2xl font-bold text-white">{nft.price} PDTK</p>
                     <button className="mt-4 w-full bg-blue-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
+                  </div>
                   </div>
                 </div>
               ))
